@@ -12,11 +12,11 @@ void print_letter (char letter, size_t num_times)
   }
 }
 
-TEST_CASE("letters example", "")
+TEST_CASE("letters counter example", "")
 {
   cout << "this will print before any letters" << endl;
-  std::thread t_1(print_letter, 'a', 100);
-  std::thread t_2(print_letter, 'b', 100);
+  thread t_1(print_letter, 'b', 100);
+  std::thread t_2(print_letter, 'a', 100);
   std::thread t_3(print_letter, 'c', 100);
   // LINE A
   t_1.join();

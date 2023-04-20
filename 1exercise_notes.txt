@@ -1,0 +1,23 @@
+1) What do you think the output will be?:
+    The output will be a total of 100 'a's, 'b's, and 'c's in arbitrary order.
+
+2) Does the output match my expectations?
+    Yes, but I am not sure if the reason behind the output is caused by concurrency or parallelism. I notice that the order of the output of the letters is consistently changing. I do notice that the first 20 characters or start with all 'a's. I think this because of some bias implicit to how we coded the programe because since 'a' is the first line that gets translated into machine code, then it gets executed first. But i'm hesitant to commit to this answer fully because in the session you stated that each line is not a 1-1 translation to machine code. After changing the order of the first letters, I replicated this phenomena. The sequence gets broken after because thats when the other threads start kicking in. It doesnt seem like the threads start sequentially, but simultaneously because the next letter that breaks the chain isnt predictable. It could either be the 2nd letter or the 3rd letter. 
+
+3) When execution reaches LINE A, how many threads are running?
+    Three threads are established at the start of LINE A.
+
+4) Comment out the `join()` lines, recompile, rerun. What happened? Why?
+    The program ran like normal for about 10 characters, then when the second thread opened, the last line printed early and a new line called 
+    "terminate called without an active exception"
+    The letters also print after their expected to and continue past the "terminate" line. A new '~' character appears inbetween the final letters. 100 letters of each character type is not printed as expected.
+
+    The test failed due to a fatal error condition called:
+    "SIGABORT - abnormal termination signal)"
+
+
+5) Run `ls` in the `./build` dir. What are the new files? Uncomment.
+    two new files appeared called `core.#####`. These core files are 'ELF 64-bit LSB files' according to the command `file core.#####`. After reading what an ELF file is, I think it is a core dump. You cannot open the file in VIM because it will display assembly instructions since we didnt compile with the -g prefix. IBM has a documentation explaining how to debug and analyze core files.
+
+6) Assuming that we dont care about the exact ordering of the letters are there any problems with this code?
+  You didnt need to explictly include the `std::thread` since you added the namespace at the top of the file (unless done for a programming convention). Also your test case doesnt test anything. If you wanted to return 100 numbers you are only returning 99.
