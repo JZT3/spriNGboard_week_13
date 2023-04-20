@@ -1,0 +1,2 @@
+1) Why are counter and counter_mutex being passed by reference to the threads?
+
